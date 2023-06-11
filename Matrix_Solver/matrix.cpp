@@ -1,5 +1,4 @@
-#include "matrix.h"
-
+#include "matrix.hpp"
 
 template <class t>
 void matrix<t>::PrintMat(vector<vector<t>> a, string name)

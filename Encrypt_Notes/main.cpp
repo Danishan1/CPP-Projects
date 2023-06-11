@@ -8,14 +8,14 @@ int main()
     octadec c = octadec(8);
 
     a = 25;
-    b = 50000;
+    b = 500;
     c = 0;
     // c = a*b;
-    cout << a.octToInt(a);
-    cout << b.octToInt(b);
-    cout << c.octToInt(c);
+    cout << a.octToInt(a) << "\n";
+    cout << b.octToInt(b) << "\n";
+    cout << c.octToInt(c) << "\n";
 
-    // a.print();
+    a.print();
     // b.print();
     // c.print();
 
