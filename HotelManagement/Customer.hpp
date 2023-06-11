@@ -1,8 +1,7 @@
 #ifndef CUSTOMER
 #define CUSTOMER
 
-
-
+// Class Customer
 class Customer
 {
 public:
@@ -14,5 +13,8 @@ public:
     float payment_advance;
     int booking_id;
 };
+
+
+
 
 #endif

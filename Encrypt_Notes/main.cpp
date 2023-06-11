@@ -3,18 +3,22 @@
 
 int main()
 {
-    octadec a, b, c;
+    octadec a = octadec(8);
+    octadec b = octadec(8);
+    octadec c = octadec(8);
 
     a = 25;
-    b = 30 + 20;
-    c = a + b;
-    // cout << a.a;
-    // cout << b.a;
-    // a = a + b;
+    b = 50000;
+    c = 0;
+    // c = a*b;
+    cout << a.octToInt(a);
+    cout << b.octToInt(b);
+    cout << c.octToInt(c);
 
-    a.print();
-    b.print();
-    c.print();
+    // a.print();
+    // b.print();
+    // c.print();
+
     // encript e("s");
     // e.init();
 
