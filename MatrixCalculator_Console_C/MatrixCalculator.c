@@ -153,7 +153,8 @@ int main()
                "   6. Transpose of Matrix B \n"
                "   7. ReEnter Matrices \n"
                "   8. Print of Matrix A \n"
-               "   9. Print of Matrix B \n\n"
+               "   9. Print of Matrix B \n"
+               "   10. Exit \n\n"
                "Enter : ");
         scanf("%d", &num);
 
@@ -195,6 +196,10 @@ int main()
             break;
         case 9:
             showmatrix(array2, "B");
+            break;
+        case 10:
+            printf("\nThanks for Exploring Matrix Solver.\nYou are Successfully Exit.\n");
+            return 0;
             break;
 
         default:
