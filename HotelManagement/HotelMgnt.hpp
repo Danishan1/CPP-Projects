@@ -169,5 +169,4 @@ void HotelMgnt::checkOut(int roomNum)
     getch();
 }
 
-
 #endif
