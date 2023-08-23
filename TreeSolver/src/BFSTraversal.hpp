@@ -3,17 +3,17 @@
 
 #include "CreateTree.hpp"
 
-class BSFTraversal : virtual public Tree
+class BSF : virtual public Tree
 {
-    void BFSTraversal1(node *root);
-    void BFSTraversalN1(node *root);
+    void BFSTraversal(node *root);
+    void BFSTraversalN(node *root);
 
 public:
-    void BFSTraversal() { BFSTraversal1(root); }
-    void BFSTraversalN() { BFSTraversalN1(root); }
+    void BFS() { BFSTraversal(root); }
+    void BFSn() { BFSTraversalN(root); }
 };
 
-void BSFTraversal::BFSTraversal1(node *root)
+void BSF::BFSTraversal(node *root)
 {
     queue<node *> q;
     if (!root)
@@ -31,7 +31,7 @@ void BSFTraversal::BFSTraversal1(node *root)
     }
 }
 
-void BSFTraversal::BFSTraversalN1(node *root)
+void BSF::BFSTraversalN(node *root)
 {
     queue<node *> q;
     if (!root)
@@ -68,7 +68,7 @@ void BSFTraversal::BFSTraversalN1(node *root)
 //     vector<int> t = {1, 2, 3, 4, -1, -1, 5, -1, -1, 6, -1, -1, 7, -1, 8, 9, -1, -1, 10, -1, -1};
 //     int i = 0;
 //     node *root = createTree(t, i);
-//     BFSTraversal1(root);
+//     BFSTraversal(root);
 //     cout << "\n";
 //     BFSTraversal2(root);
 // }

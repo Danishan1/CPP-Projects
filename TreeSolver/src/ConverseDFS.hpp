@@ -1,53 +1,55 @@
-#include <bits/stdc++.h>
-using namespace std;
+#ifndef CONDFS
+#define CONDFS
 
-struct node
+#include "CreateTree.hpp"
+
+
+class conDFS : virtual public Tree
 {
-    int data;
-    node *l, *r;
-    node() : l(NULL), r(NULL) {}
-    node(int a) : l(NULL), r(NULL), data(a) {}
+    void conDFSPre(node *t);
+    void conPrintIn(node *t);
+    void conPrintPost(node *t);
+    void conDFSLoopPre(node *t);
+    void conDFStLoopPost(node *t);
+    void conDFSLoopIn(node *root);
+
+public:
+    void conDFSPre() { conDFSPre(root); };
+    void conPrintIn() { conPrintIn(root); };
+    void conPrintPost() { conPrintPost(root); };
+    void conDFSLoopPre() { conDFSLoopPre(root); };
+    void conDFStLoopPost() { conDFStLoopPost(root); };
+    void conDFSLoopIn() { conDFSLoopIn(root); };
 };
 
-node *createTree(vector<int> &v, int &i)
+void conDFS::conDFSPre(node *t)
 {
-    if (v[i] == -1)
-    {
-        i++;
-        return NULL;
-    }
-    node *t = new node(v[i++]);
-    t->l = createTree(v, i);
-    t->r = createTree(v, i);
-    return t;
+    if (!t)
+        return;
+    cout << t->data << " ";
+    conDFSPre(t->r);
+    conDFSPre(t->l);
 }
 
-void printPre(node *t)
+void conDFS::conPrintIn(node *t)
 {
     if (!t)
         return;
+    conPrintIn(t->r);
     cout << t->data << " ";
-    printPre(t->r);
-    printPre(t->l);
+    conPrintIn(t->l);
 }
-void printIn(node *t)
+
+void conDFS::conPrintPost(node *t)
 {
     if (!t)
         return;
-    printIn(t->r);
-    cout << t->data << " ";
-    printIn(t->l);
-}
-void printPost(node *t)
-{
-    if (!t)
-        return;
-    printPost(t->r);
-    printPost(t->l);
+    conPrintPost(t->r);
+    conPrintPost(t->l);
     cout << t->data << " ";
 }
 
-void printLoopPre(node *t)
+void conDFS::conDFSLoopPre(node *t)
 {
     stack<node *> st;
     if (!t)
@@ -65,7 +67,7 @@ void printLoopPre(node *t)
     }
 }
 
-void printLoopPost(node *t)
+void conDFS::conDFStLoopPost(node *t)
 {
     stack<node *> st;
     vector<int> v;
@@ -87,7 +89,8 @@ void printLoopPost(node *t)
         cout << *i << " ";
     }
 }
-void printLoopIn(node *root)
+
+void conDFS::conDFSLoopIn(node *root)
 {
     stack<node *> st;
     if (!root)
@@ -112,24 +115,4 @@ void printLoopIn(node *root)
     }
 }
 
-int main()
-{
-    vector<int> t = {1, 2, 3, 4, -1, -1, 5, -1, -1, 6, -1, -1, 7, -1, 8, 9, -1, -1, 10, -1, -1};
-    int i = 0;
-    node *root = createTree(t, i);
-
-    printPre(root);
-    cout << "\n";
-    printLoopPre(root);
-    cout << "\n";
-
-    printIn(root);
-    cout << "\n";
-    printLoopIn(root);
-    cout << "\n";
-
-    printPost(root);
-    cout << "\n";
-    printLoopPost(root);
-    cout << "\n";
-}
+#endif

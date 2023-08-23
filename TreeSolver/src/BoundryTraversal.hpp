@@ -1,35 +1,31 @@
-#include <bits/stdc++.h>
-using namespace std;
+#ifndef BOUNDRY
+#define BOUNDRY
 
-struct node
+#include "CreateTree.hpp"
+
+class BoundryTra : virtual public Tree
 {
-    int data;
-    node *l, *r;
-    node() : l(NULL), r(NULL) {}
-    node(int a) : l(NULL), r(NULL), data(a) {}
+    bool isLeaf(node *t);
+    deque<int> leafs(node *root);
+    deque<int> left(node *root);
+    deque<int> right(node *root);
+    vector<deque<int>> requiredNodes(node *root);
+    void BoundryClock(node *root);
+    void BoundryAntiClock(node *root);
+
+public:
+    void BoundryClock() { BoundryClock(root); }
+    void BoundryAntiClock() { BoundryAntiClock(root); }
 };
 
-node *createTree(vector<int> &v, int &i)
-{
-    if (v[i] == -1)
-    {
-        i++;
-        return NULL;
-    }
-    node *t = new node(v[i++]);
-    t->l = createTree(v, i);
-    t->r = createTree(v, i);
-    return t;
-}
-
-bool isLeaf(node *t)
+bool BoundryTra::isLeaf(node *t)
 {
     if (!t->l && !t->r)
         return true;
     return false;
 }
 
-deque<int> leafs(node *root)
+deque<int> BoundryTra::leafs(node *root)
 {
     deque<int> dq;
     stack<node *> s;
@@ -53,7 +49,7 @@ deque<int> leafs(node *root)
     return dq;
 }
 
-deque<int> left(node *root)
+deque<int> BoundryTra::left(node *root)
 {
     deque<int> dq;
     auto t = root;
@@ -71,7 +67,7 @@ deque<int> left(node *root)
     return dq;
 }
 
-deque<int> right(node *root)
+deque<int> BoundryTra::right(node *root)
 {
     deque<int> dq;
     auto t = root;
@@ -89,11 +85,11 @@ deque<int> right(node *root)
     return dq;
 }
 
-vector<deque<int>> requiredNodes(node *root)
+vector<deque<int>> BoundryTra::requiredNodes(node *root)
 {
     queue<node *> q;
     vector<deque<int>> v(3);
-    int level =0;
+    int level = 0;
 
     if (!root)
         return {};
@@ -120,7 +116,7 @@ vector<deque<int>> requiredNodes(node *root)
             {
                 v[2].push_back(t->data);
             }
-            if(isLeaf(t))
+            if (isLeaf(t))
             {
                 v[0].push_back(t->data);
             }
@@ -135,7 +131,7 @@ vector<deque<int>> requiredNodes(node *root)
     return v;
 }
 
-void BoundryClock(node *root)
+void BoundryTra::BoundryClock(node *root)
 {
     auto dq1 = leafs(root);
     auto dq2 = left(root);
@@ -155,7 +151,7 @@ void BoundryClock(node *root)
     }
 }
 
-void BoundryAntiClock(node *root)
+void BoundryTra::BoundryAntiClock(node *root)
 {
     auto dq1 = leafs(root);
     auto dq2 = left(root);
@@ -176,16 +172,4 @@ void BoundryAntiClock(node *root)
     }
 }
 
-int main()
-{
-    vector<int> t = {1, 2, 3, 4, -1, -1, 5, -1, -1, 6, -1, -1, 7, -1, 8, 9, -1, -1, 10, -1, -1};
-    int i = 0;
-    node *root = createTree(t, i);
-
-    BoundryClock(root);
-    cout << "\n";
-    BoundryAntiClock(root);
-    cout << "\n";
-
-    requiredNodes(root);
-}
+#endif

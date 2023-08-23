@@ -15,7 +15,6 @@ public:
     node *root;
     Tree();
     node *createTree(vector<int> &v, int &i);
-    void print();
 
 protected:
 };

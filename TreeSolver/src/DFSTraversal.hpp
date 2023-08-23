@@ -3,55 +3,52 @@
 
 #include "CreateTree.hpp"
 
-
-class DFSTraversal : virtual public Tree
+class DFS : virtual public Tree
 {
-    void printPre1(node *t);
-    void printIn1(node *t);
-    void printPost1(node *t);
-    void printLoopPre1(node *t);
-    void printLoopPost1(node *t);
-    void printLoopIn1(node *root);
+    void dfsPre(node *t);
+    void dfsIn(node *t);
+    void dfsPost(node *t);
+    void dfsLoopPre(node *t);
+    void dfsLoopPost(node *t);
+    void dfsLoopIn(node *root);
 
 public:
-    
-    void printPre() { printLoopPre1(root); }
-    void printIn() { printIn1(root); };
-    void printPost() { printPost1(root); };
-    void printLoopPre() { printLoopPre1(root); };
-    void printLoopPost() { printLoopPost1(root); };
-    void printLoopIn() { printLoopIn1(root); };
+    void dfsPre() { dfsPre(root); }
+    void dfsIn() { dfsIn(root); };
+    void dfsPost() { dfsPost(root); };
+    void dfsLoopPre() { dfsLoopPre(root); };
+    void dfsLoopPost() { dfsLoopPost(root); };
+    void dfsLoopIn() { dfsLoopIn(root); };
 };
 
-
-void DFSTraversal::printPre1(node *t)
+void DFS::dfsPre(node *t)
 {
     if (!t)
         return;
     cout << t->data << " ";
-    printPre1(t->l);
-    printPre1(t->r);
+    dfsPre(t->l);
+    dfsPre(t->r);
 }
 
-void DFSTraversal::printIn1(node *t)
+void DFS::dfsIn(node *t)
 {
     if (!t)
         return;
-    printIn1(t->l);
+    dfsIn(t->l);
     cout << t->data << " ";
-    printIn1(t->r);
+    dfsIn(t->r);
 }
 
-void DFSTraversal::printPost1(node *t)
+void DFS::dfsPost(node *t)
 {
     if (!t)
         return;
-    printPost1(t->l);
-    printPost1(t->r);
+    dfsPost(t->l);
+    dfsPost(t->r);
     cout << t->data << " ";
 }
 
-void DFSTraversal::printLoopPre1(node *t)
+void DFS::dfsLoopPre(node *t)
 {
     stack<node *> st;
     if (!t)
@@ -69,7 +66,7 @@ void DFSTraversal::printLoopPre1(node *t)
     }
 }
 
-void DFSTraversal::printLoopPost1(node *t)
+void DFS::dfsLoopPost(node *t)
 {
     stack<node *> st;
     vector<int> v;
@@ -92,7 +89,7 @@ void DFSTraversal::printLoopPost1(node *t)
     }
 }
 
-void DFSTraversal::printLoopIn1(node *root)
+void DFS::dfsLoopIn(node *root)
 {
     stack<node *> st;
     if (!root)
@@ -116,7 +113,5 @@ void DFSTraversal::printLoopIn1(node *root)
             st.push(t->l);
     }
 }
-
-
 
 #endif
