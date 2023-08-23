@@ -3,15 +3,8 @@
 
 #include "CreateTree.hpp"
 
-struct node
-{
-    int data;
-    node *l, *r;
-    node() : l(NULL), r(NULL) {}
-    node(int a) : l(NULL), r(NULL), data(a) {}
-};
 
-class DFSTraversal : public Tree
+class DFSTraversal : virtual public Tree
 {
     void printPre1(node *t);
     void printIn1(node *t);
@@ -21,11 +14,7 @@ class DFSTraversal : public Tree
     void printLoopIn1(node *root);
 
 public:
-    DFSTraversal()
-    {
-        
-        
-    }
+    
     void printPre() { printLoopPre1(root); }
     void printIn() { printIn1(root); };
     void printPost() { printPost1(root); };
@@ -34,18 +23,6 @@ public:
     void printLoopIn() { printLoopIn1(root); };
 };
 
-// node *createTree(vector<int> &v, int &i)
-// {
-//     if (v[i] == -1)
-//     {
-//         i++;
-//         return NULL;
-//     }
-//     node *t = new node(v[i++]);
-//     t->l = createTree(v, i);
-//     t->r = createTree(v, i);
-//     return t;
-// }
 
 void DFSTraversal::printPre1(node *t)
 {
@@ -55,6 +32,7 @@ void DFSTraversal::printPre1(node *t)
     printPre1(t->l);
     printPre1(t->r);
 }
+
 void DFSTraversal::printIn1(node *t)
 {
     if (!t)
@@ -63,6 +41,7 @@ void DFSTraversal::printIn1(node *t)
     cout << t->data << " ";
     printIn1(t->r);
 }
+
 void DFSTraversal::printPost1(node *t)
 {
     if (!t)
@@ -138,26 +117,6 @@ void DFSTraversal::printLoopIn1(node *root)
     }
 }
 
-// int main()
-// {
-//     vector<int> t = {1, 2, 3, 4, -1, -1, 5, -1, -1, 6, -1, -1, 7, -1, 8, 9, -1, -1, 10, -1, -1};
-//     int i = 0;
-//     node *root = createTree(t, i);
 
-//     printPre1(root);
-//     cout << "\n";
-//     printLoopPre1(root);
-//     cout << "\n";
-
-//     printIn1(root);
-//     cout << "\n";
-//     printLoopIn1(root);
-//     cout << "\n";
-
-//     printPost1(root);
-//     cout << "\n";
-//     printLoopPost1(root);
-//     cout << "\n";
-// }
 
 #endif

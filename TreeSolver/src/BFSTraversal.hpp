@@ -1,28 +1,19 @@
-#include <bits/stdc++.h>
-using namespace std;
+#ifndef BSFTRAVERSAL
+#define BSFTRAVERSAL
 
-struct node
+#include "CreateTree.hpp"
+
+class BSFTraversal : virtual public Tree
 {
-    int data;
-    node *l, *r;
-    node() : l(NULL), r(NULL) {}
-    node(int a) : l(NULL), r(NULL), data(a) {}
+    void BFSTraversal1(node *root);
+    void BFSTraversalN1(node *root);
+
+public:
+    void BFSTraversal() { BFSTraversal1(root); }
+    void BFSTraversalN() { BFSTraversalN1(root); }
 };
 
-node *createTree(vector<int> &v, int &i)
-{
-    if (v[i] == -1)
-    {
-        i++;
-        return NULL;
-    }
-    node *t = new node(v[i++]);
-    t->l = createTree(v, i);
-    t->r = createTree(v, i);
-    return t;
-}
-
-void BFSTraversal(node *root)
+void BSFTraversal::BFSTraversal1(node *root)
 {
     queue<node *> q;
     if (!root)
@@ -39,7 +30,8 @@ void BFSTraversal(node *root)
             q.push(t->r);
     }
 }
-void BFSTraversal2(node *root)
+
+void BSFTraversal::BFSTraversalN1(node *root)
 {
     queue<node *> q;
     if (!root)
@@ -71,12 +63,14 @@ void BFSTraversal2(node *root)
     }
 }
 
-int main()
-{
-    vector<int> t = {1, 2, 3, 4, -1, -1, 5, -1, -1, 6, -1, -1, 7, -1, 8, 9, -1, -1, 10, -1, -1};
-    int i = 0;
-    node *root = createTree(t, i);
-    BFSTraversal(root);
-    cout << "\n";
-    BFSTraversal2(root);
-}
+// int main()
+// {
+//     vector<int> t = {1, 2, 3, 4, -1, -1, 5, -1, -1, 6, -1, -1, 7, -1, 8, 9, -1, -1, 10, -1, -1};
+//     int i = 0;
+//     node *root = createTree(t, i);
+//     BFSTraversal1(root);
+//     cout << "\n";
+//     BFSTraversal2(root);
+// }
+
+#endif
