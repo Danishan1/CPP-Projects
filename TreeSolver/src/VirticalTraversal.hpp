@@ -14,6 +14,8 @@ public:
 
 void virtical::VirticalTraversal(node *root)
 {
+    if(!root) return;
+
     map<int, map<int, multiset<int>>> m;   // (x, y, value)
     queue<pair<node *, pair<int, int>>> q; // (value, x, y)
     q.push({root, {0, 0}});
@@ -38,11 +40,12 @@ void virtical::VirticalTraversal(node *root)
             // v.insert(v.end(), j.second.begin(), j.second.end());
             for (auto k : j.second)
             {
-                cout << "(" << i.first << ", " << j.first << ") :  " << k << " \n";
+                // cout << "(" << i.first << ", " << j.first << ") :  " << k << " \n";
+                cout <<  k << " ";
             }
         }
         // ans.push_back(v);
-        cout << "\n";
+        // cout << "\n";
     }
 }
 

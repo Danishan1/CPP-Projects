@@ -1,29 +1,26 @@
-#include <bits/stdc++.h>
-using namespace std;
+#ifndef VIEWS
+#define VIEWS
 
-struct node
+#include "CreateTree.hpp"
+
+class Views : virtual public Tree
 {
-    int data;
-    node *l, *r;
-    node() : l(NULL), r(NULL) {}
-    node(int a) : l(NULL), r(NULL), data(a) {}
+    void leftView(node *root);
+    void rightView(node *root);
+    void topView(node *root);
+    void bottomView(node *root);
+
+public:
+    void leftView() { leftView(root); };
+    void rightView() { rightView(root); };
+    void topView() { topView(root); };
+    void bottomView() { bottomView(root); };
 };
 
-node *createTree(vector<int> &v, int &i)
+void Views::leftView(node *root)
 {
-    if (v[i] == -1)
-    {
-        i++;
-        return NULL;
-    }
-    node *t = new node(v[i++]);
-    t->l = createTree(v, i);
-    t->r = createTree(v, i);
-    return t;
-}
+    if(!root) return;
 
-void leftView(node *root)
-{
     auto t = root;
     while (t)
     {
@@ -35,8 +32,10 @@ void leftView(node *root)
     }
 }
 
-void rightView(node *root)
+void Views::rightView(node *root)
 {
+    if(!root) return;
+
     auto t = root;
     while (t)
     {
@@ -48,8 +47,10 @@ void rightView(node *root)
     }
 }
 
-void topView(node *root)
+void Views::topView(node *root)
 {
+    if(!root) return;
+
     map<int, int> m;
     queue<pair<int, node *>> q;
     q.push({0, root});
@@ -74,8 +75,10 @@ void topView(node *root)
     }
 }
 
-void bottomView(node *root)
+void Views::bottomView(node *root)
 {
+    if(!root) return;
+
     map<int, int> m;
     queue<pair<int, node *>> q;
     q.push({0, root});
@@ -99,18 +102,4 @@ void bottomView(node *root)
     }
 }
 
-int main()
-{
-    vector<int> t = {1, 2, 3, 4, -1, -1, 5, -1, -1, 6, -1, -1, 7, -1, 8, 9, -1, -1, 10, -1, -1};
-    int i = 0;
-    node *root = createTree(t, i);
-    leftView(root);
-    cout << "\n";
-    rightView(root);
-    cout << "\n";
-    topView(root);
-    cout << "\n";
-    bottomView(root);
-    cout << "\n";
-
-}
+#endif

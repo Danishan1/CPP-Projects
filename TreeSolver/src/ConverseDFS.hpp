@@ -7,16 +7,16 @@
 class conDFS : virtual public Tree
 {
     void conDFSPre(node *t);
-    void conPrintIn(node *t);
-    void conPrintPost(node *t);
+    void conDFSIn(node *t);
+    void conDFSPost(node *t);
     void conDFSLoopPre(node *t);
     void conDFStLoopPost(node *t);
     void conDFSLoopIn(node *root);
 
 public:
     void conDFSPre() { conDFSPre(root); };
-    void conPrintIn() { conPrintIn(root); };
-    void conPrintPost() { conPrintPost(root); };
+    void conDFSIn() { conDFSIn(root); };
+    void conDFSPost() { conDFSPost(root); };
     void conDFSLoopPre() { conDFSLoopPre(root); };
     void conDFStLoopPost() { conDFStLoopPost(root); };
     void conDFSLoopIn() { conDFSLoopIn(root); };
@@ -31,21 +31,21 @@ void conDFS::conDFSPre(node *t)
     conDFSPre(t->l);
 }
 
-void conDFS::conPrintIn(node *t)
+void conDFS::conDFSIn(node *t)
 {
     if (!t)
         return;
-    conPrintIn(t->r);
+    conDFSIn(t->r);
     cout << t->data << " ";
-    conPrintIn(t->l);
+    conDFSIn(t->l);
 }
 
-void conDFS::conPrintPost(node *t)
+void conDFS::conDFSPost(node *t)
 {
     if (!t)
         return;
-    conPrintPost(t->r);
-    conPrintPost(t->l);
+    conDFSPost(t->r);
+    conDFSPost(t->l);
     cout << t->data << " ";
 }
 

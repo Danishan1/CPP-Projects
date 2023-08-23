@@ -133,6 +133,7 @@ vector<deque<int>> BoundryTra::requiredNodes(node *root)
 
 void BoundryTra::BoundryClock(node *root)
 {
+    if(!root) return;
     auto dq1 = leafs(root);
     auto dq2 = left(root);
     auto dq3 = right(root);
@@ -153,6 +154,7 @@ void BoundryTra::BoundryClock(node *root)
 
 void BoundryTra::BoundryAntiClock(node *root)
 {
+    if(!root) return;
     auto dq1 = leafs(root);
     auto dq2 = left(root);
     auto dq3 = right(root);
