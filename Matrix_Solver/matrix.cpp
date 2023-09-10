@@ -352,6 +352,7 @@ bool matrix<t>::isDiagonalMat(vector<vector<t>> a)
 template <class t>
 bool matrix<t>::isTriDiagonalMat(vector<vector<t>> a)
 {
+    return false;
 }
 
 template <class t>
@@ -460,6 +461,161 @@ bool matrix<t>::isInvolutory(vector<vector<t>> a) // A*A = I
 // template <class t>
 // vector<vector<t>> matrix<t>::ProductSqrMat(vector<vector<t>> a, vector<vector<t>> b) {}
 
+#include <conio.h>
+void optn()
+{
+    int m1, n1, m2, n2;
+    system("cls");
+    cout << "      ~ Welcome to Matric Solver ~ \n\n";
+    cout << "Enter number of rows of Matrix - A : ";
+    cin >> m1;
+    cout << "Enter number of columns of Matrix - A : ";
+    cin >> n1;
+    cout << "Values of Matrix A\n\n";
+
+    vector<vector<float>> matA(m1, vector<float>(n1, 0));
+
+    for (int i = 0; i < m1; i++)
+    {
+        for (int j = 0; j < n1; j++)
+        {
+            cout << "Matrix_A[" << i << "][" << j << "] = ";
+            cin >> matA[i][j];
+        }
+    }
+    system("cls");
+    matrix<float> M;
+    M.PrintMat(matA, "Matrix A");
+
+    cout << "\nEnter number of rows of Matrix - B : ";
+    cin >> m2;
+    cout << "Enter number of columns of Matrix - B : ";
+    cin >> n2;
+    cout << "Values of Matrix B\n\n";
+
+    vector<vector<float>> matB(m2, vector<float>(n2, 0));
+
+    for (int i = 0; i < m2; i++)
+    {
+        for (int j = 0; j < n2; j++)
+        {
+            cout << "Matrix_B[" << i << "][" << j << "] = ";
+            cin >> matB[i][j];
+        }
+    }
+
+    system("cls");
+    M.PrintMat(matA, "Matrix A");
+    M.PrintMat(matB, "Matrix B");
+
+    while (1)
+    {
+
+        cout << "Enter any key to move further, Enter : ";
+        getch();
+        system("cls");
+
+        cout << "Make a Choice\n";
+
+        cout << "\n1. Print Matrix A ";
+        cout << "\n2. Print Matrix B ";
+        cout << "\n3. Sum (A + B)";
+        cout << "\n4. Difference (A - B) ";
+        cout << "\n5. Transpose of A (A = A') ";
+        cout << "\n6. Transpose of B (B = B') : ";
+        cout << "\n7. Component Multiple (A O A) : ";
+        cout << "\n8. Inner Product (ATB) : "; // T => transpose
+        cout << "\n9. Outer Product (ABT) : "; // T => transpose
+        cout << "\n10. is Equal Matrix (A, B)";
+        cout << "\n11. is Square Matrix (A) ";
+        cout << "\n12. is Symmetrix Matrix (A) ";
+        cout << "\n13. is SkewSymmetrix Matrix (B) ";
+        cout << "\n14. is Diagonal Matrix (B) ";
+        cout << "\n15. is Orthogonal Matrix (B) ";
+        cout << "\n16. is Idempotant Matrix (B) ";
+        cout << "\n-1. To Exit";
+
+        int flagCho;
+        cout << "Enter your Choice : ";
+        cin >> flagCho;
+
+        switch (flagCho)
+        {
+        case 1:
+            M.PrintMat(matA, "Matrix A : ");
+            break;
+        case 2:
+            M.PrintMat(matB, "Matrix B : ");
+            break;
+        case 3:
+            if (m1 == m2 && n1 == n2)
+                M.PrintMat(M.sumMat(matA, matB), "Sum (A + A) : ");
+            else
+                cout << "m1 must equal to m2, n1 must equal to n2";
+            break;
+        case 4:
+            if (m1 == m2 && n1 == n2)
+                M.PrintMat(M.diffMat(matA, matB), "Difference (A - B) : ");
+            else
+                cout << "m1 must equal to m2, n1 must equal to n2";
+
+            break;
+        case 5:
+            M.PrintMat(M.TransposeMat(matA), "Transpose (A = A') : ");
+            break;
+        case 6:
+            M.PrintMat(M.TransposeMat(matB), "Transpose (B = B') : ");
+            break;
+        case 7:
+            if (m1 == m2 && n1 == n2)
+                M.PrintMat(M.CompoProductMat(matA, matB), "Component Multiple (A O A) : ");
+            else
+                cout << "m1 must equal to m2, n1 must equal to n2";
+
+            break;
+        case 8:
+            if (n1 == m2)
+                M.PrintMat(M.innerProductMat(matA, matB), "Inner Product (ATB) : "); // T => transpose
+            else
+                cout << "n1 must equal to m2";
+
+            break;
+        case 9:
+
+            if (m1 == n2)
+                M.PrintMat(M.outerProductMat(matA, matB), "Outer Product (ABT) : "); // T => transpose
+            else
+                cout << "m1 must equal to n2";
+
+            break;
+        case 10:
+            cout << "is Equal Matrix (A, B) : " << M.isEqualMat(matA, matB) << "\n";
+            break;
+        case 11:
+            cout << "is Square Matrix (A) : " << M.isSquareMat(matA) << "\n";
+            break;
+        case 12:
+            cout << "is Symmetrix Matrix (A): " << M.isSymmetricMat(matA) << "\n";
+            break;
+        case 13:
+            cout << "is SwewSymmetrix Matrix (A): " << M.isSkewSymmetricMat(matA) << "\n";
+            break;
+        case 14:
+            cout << "is Diagonal Matrix (A) : " << M.isDiagonalMat(matA) << "\n";
+            break;
+        case 15:
+            cout << "is Orthogonal Matrix (A) : " << M.isOrthogonalMat(matA) << "\n";
+            break;
+        case 16:
+            cout << "is Idempotant Matrix (A) : " << M.isIdempotentMat(matA) << "\n";
+            break;
+        case -1:
+            return;
+            break;
+        }
+    }
+}
+
 int main()
 {
     vector<vector<float>> a = {
@@ -496,9 +652,11 @@ int main()
     //     {5, 6, 6, 8},
     //     {1, 2, 2, 4}};
 
-    matrix<float> M;
-    M.PrintMat(a, "Matrix A : ");
-    M.PrintMat(b, "Matrix B : ");
+    optn();
+
+    // matrix<float> M;
+    // M.PrintMat(a, "Matrix A : ");
+    // M.PrintMat(b, "Matrix B : ");
     // M.PrintMat(M.sumMat(a, a), "Sum (A + A) : ");
     // M.PrintMat(M.diffMat(a, a), "Difference (A - A) : ");
     // M.PrintMat(M.TransposeMat(a), "Transpose (A = A') : ");
@@ -507,14 +665,15 @@ int main()
     // M.PrintMat(M.innerProductMat(a, b), "Inner Product (ATB) : "); // T => transpose
     // M.PrintMat(M.outerProductMat(a, b), "Outer Product (ABT) : "); // T => transpose
 
-    cout << "is Equal Matrix (A, B) : " << M.isEqualMat(a, b) << "\n";
-    cout << "is Square Matrix (A) : " << M.isSquareMat(a) << "\n";
-    cout << "is Symmetrix Matrix (A): " << M.isSymmetricMat(a) << "\n";
-    cout << "is Symmetrix Matrix (B): " << M.isSymmetricMat(b) << "\n";
-    cout << "is SwewSymmetrix Matrix (B): " << M.isSkewSymmetricMat(b) << "\n";
-    cout << "is Diagonal Matrix (B) : " << M.isDiagonalMat(b) << "\n";
-    cout << "is Orthogonal Matrix (B) : " << M.isOrthogonalMat(b) << "\n";
-    cout << "is Idempotant Matrix (B) : " << M.isIdempotentMat(b) << "\n";
+    // cout << "is Equal Matrix (A, B) : " << M.isEqualMat(a, b) << "\n";
+    // cout << "is Square Matrix (A) : " << M.isSquareMat(a) << "\n";
+    // cout << "is Symmetrix Matrix (A): " << M.isSymmetricMat(a) << "\n";
+    // cout << "is Symmetrix Matrix (B): " << M.isSymmetricMat(b) << "\n";
+    // cout << "is SwewSymmetrix Matrix (B): " << M.isSkewSymmetricMat(b) << "\n";
+    // cout << "is Diagonal Matrix (B) : " << M.isDiagonalMat(b) << "\n";
+    // cout << "is Orthogonal Matrix (B) : " << M.isOrthogonalMat(b) << "\n";
+    // cout << "is Idempotant Matrix (B) : " << M.isIdempotentMat(b) << "\n";
 
     cout << "\nSuccessfully Printed ...End :)\n\n";
+    return 0;
 }
